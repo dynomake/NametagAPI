@@ -1,2 +1,2 @@
 rootProject.name = 'nametagapi'
-
+org.gradle.dependency.verification.console=verbose
