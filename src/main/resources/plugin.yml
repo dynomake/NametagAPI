@@ -1,0 +1,5 @@
+name: NametagAPI
+main: com.nametagedit.plugin.NametagEdit
+version: ${project.version}
+api-version: 1.13
+authors: [sgtcaze, Cory, Lorenzo0111, Aurelien30000]

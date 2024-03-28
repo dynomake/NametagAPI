@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'io.github.dynomake'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://repo.aikar.co/content/groups/aikar/' }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url 'https://repo.codemc.io/repository/nms/' }
+
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot:1.20.4-R0.1-SNAPSHOT'
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+    implementation 'org.slf4j:slf4j-jdk14:1.7.32'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'com.mojang:authlib:5.0.51'
+    implementation 'com.google.guava:guava:32.0.0-jre'
+    implementation 'co.aikar:acf-paper:0.5.1-SNAPSHOT'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "clojars"
+            url = uri("https://clojars.org/repo")
+            credentials {
+                username = "$System.env.deployUser"
+                password = "$System.env.deployToken"
+            }
+        }
+
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+
+            pom {
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/dynomake/wonsi/blob/master/LICENSE'
+                    }
+                }
+            }
+        }
+    }
+}
